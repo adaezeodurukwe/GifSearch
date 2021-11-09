@@ -6,7 +6,6 @@ import { SearchService } from 'src/app/core/services/search.service';
 import { NgxsStoreModule } from 'src/app/core/store/store.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormBuilder } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;

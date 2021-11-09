@@ -8,7 +8,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ResultsComponent } from './components/results/results.component';
 import { SearchComponent } from './components/search/search.component';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
 import { NgxsModule } from '@ngxs/store';
 import { SearchState } from './core/store/search.state';
 

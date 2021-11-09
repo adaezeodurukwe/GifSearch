@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Gif } from '../store/search.model';
-
-export interface ReturnData {
-  data: Gif[];
-}
+import { ReturnData } from '../models';
 
 @Injectable({
   providedIn: 'root',

@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
+import { Gif, SearchStateModel } from '../models';
 import { SearchService } from '../services/search.service';
 import { GetResult, ResetResult, SetLoading } from './search.actions';
-import { Gif } from './search.model';
 
-interface SearchStateModel {
-  gifs: Gif[];
-  loading: boolean;
-}
 
 @State<SearchStateModel>({
   name: 'gifs',

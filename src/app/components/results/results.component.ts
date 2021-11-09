@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Gif } from '../../core/store/search.model';
+import { Gif } from 'src/app/core/models';
 import { SearchState } from '../../core/store/search.state';
 
 @Component({
