@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
-import { SearchService } from '../core/services/search.service';
+import { SearchService } from '../services/search.service';
 import { GetResult, ResetResult, SetLoading } from './search.actions';
 import { Gif } from './search.model';
 
@@ -47,7 +47,6 @@ export class SearchState {
       }),
       catchError((error): any => {
         patchState({ loading: false });
-        console.log(error);        
       })
     );
   }

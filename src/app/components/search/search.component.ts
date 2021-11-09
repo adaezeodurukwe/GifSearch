@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { GetResult, SetLoading, ResetResult } from '../../store/search.actions';
+import { GetResult, SetLoading, ResetResult } from '../../core/store/search.actions';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 

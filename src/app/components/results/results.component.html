@@ -7,8 +7,8 @@
   </div>
   <ng-template #results>
     <div *ngIf="gifs$ | async as gifs" class="w-4/5 md:w-3/5 m-auto">
-      <div *ngIf="!gifs[0]" class="text-center">Start searching</div>
-      <ul  class="w-full md:grid md:grid-cols-4 gap-4">
+      <div *ngIf="!gifs[0]" class="text-center">Start searching Gifs</div>
+      <ul class="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
         <li *ngFor="let gif of gifs; let idx = index;" class="gifitem">
           <img class="h-40 w-full" src={{gif.images.downsized.url}} alt="">
         </li>

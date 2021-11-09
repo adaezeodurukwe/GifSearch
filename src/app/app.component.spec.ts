@@ -4,14 +4,13 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { SearchService } from 'src/app/core/services/search.service';
-import { NgxsStoreModule } from 'src/app/store/store.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ResultsComponent } from './components/results/results.component';
 import { SearchComponent } from './components/search/search.component';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { NgxsModule } from '@ngxs/store';
-import { SearchState } from './store/search.state';
+import { SearchState } from './core/store/search.state';
 
 const gifMock = {
   data: [
@@ -55,7 +54,6 @@ describe('AppComponent', () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    mockSearchService.searchGIF.and.returnValue(of(gifMock));
   });
   it(
     'should create the app',
@@ -74,15 +72,4 @@ describe('AppComponent', () => {
     let listEl = fixture.debugElement.query(By.css('.wrapper'))
     expect(listEl).toBeTruthy();
   }));
-
-  it('should show gif', waitForAsync(() => {
-    let input = fixture.debugElement.query(By.css('input')).nativeElement;
-    input.value = 'someValue'
-    input.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    
-    let listEl = fixture.debugElement.query(By.css('.gifitem'))
-    expect(listEl).toBeTruthy();
-  }));
-
 });
