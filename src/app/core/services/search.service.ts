@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Gif } from 'src/app/store/search.model';
 
 export interface ReturnData {
-  next: string;
   data: Gif[];
 }
 

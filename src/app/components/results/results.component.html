@@ -1,16 +1,18 @@
-<div *ngIf="loading$ | async as loading; else results">
-  <div class="">
-    <img style="width: 150px;" src="https://cdn.dribbble.com/users/108390/screenshots/2882839/spinner-loop.gif"
-      alt="Loading...">
+<div class="wrapper">
+  <div *ngIf="loading$ | async as loading; else results">
+    <div class="">
+      <img class="m-auto" style="width: 150px;" src="https://cdn.dribbble.com/users/108390/screenshots/2882839/spinner-loop.gif"
+        alt="Loading...">
+    </div>
   </div>
+  <ng-template #results>
+    <div *ngIf="gifs$ | async as gifs" class="w-4/5 md:w-3/5 m-auto">
+      <div *ngIf="!gifs[0]" class="text-center">Start searching</div>
+      <ul  class="w-full md:grid md:grid-cols-4 gap-4">
+        <li *ngFor="let gif of gifs; let idx = index;" class="gifitem">
+          <img class="h-40 w-full" src={{gif.images.downsized.url}} alt="">
+        </li>
+      </ul>
+    </div>
+  </ng-template>
 </div>
-<ng-template #results>
-  <div *ngIf="gifs$ | async as gifs">
-    <div *ngIf="!gifs[0]">Start searching</div>
-    <ul *ngFor="let gif of gifs; let idx = index;">
-      <li>
-        <img src={{gif.images.downsized.url}} alt="">
-      </li>
-    </ul>
-  </div>
-</ng-template>

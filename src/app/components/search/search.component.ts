@@ -10,7 +10,6 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  search = '';
   searchBar: FormGroup;
   forbidden = ['cats', 'puppies'];
 
