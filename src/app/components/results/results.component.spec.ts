@@ -9,8 +9,9 @@ import {
 import { By } from '@angular/platform-browser';
 import { NgxsModule, Store } from '@ngxs/store';
 import { SearchService } from 'src/app/core/services/search.service';
+import { mockSearchService } from 'src/app/core/services/search.service.mock';
 import { GetResult, SetLoading } from 'src/app/core/store/search.actions';
-import { SearchState } from 'src/app/core/store/search.state.mock';
+import { SearchState } from 'src/app/core/store/search.state';
 import { ResultsComponent } from './results.component';
 
 const initialState = {
@@ -31,7 +32,7 @@ describe('ResultsComponent', () => {
         declarations: [ResultsComponent],
         imports: [HttpClientTestingModule, NgxsModule.forRoot([SearchState])],
         schemas: [NO_ERRORS_SCHEMA],
-        providers: [SearchService],
+        providers: [{ provide: SearchService, useValue: mockSearchService }],
       }).compileComponents();
 
       store = TestBed.inject(Store);
