@@ -41,7 +41,7 @@ export class SearchState {
       tap((data) => {
         setState({ gifs: data.data, loading: false });
       }),
-      catchError((error): any => {
+      catchError((): any => {
         patchState({ loading: false });
       })
     );

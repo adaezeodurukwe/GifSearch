@@ -1,16 +1,23 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { fakeAsync } from '@angular/core/testing';
 import { SearchService } from './search.service';
+import { of } from 'rxjs';
+import { gifMock } from './search.service.mock';
 
 describe('SearchService', () => {
+  let httpClientSpy: { get: jasmine.Spy };
+  let searchService: SearchService;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [SearchService]
-    });
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    searchService = new SearchService(httpClientSpy as any);
   });
 
-  it('should be created', inject([SearchService], (service: SearchService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should get gifs', () => {
+    httpClientSpy.get.and.returnValue(of(gifMock));
+
+    searchService.searchGIF("mimi").subscribe((gifs) => {
+      expect(gifs).toEqual(gifMock);
+    });
+    expect(httpClientSpy.get.calls.count()).toBe(1);
+  });
 });

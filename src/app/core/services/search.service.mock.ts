@@ -1,6 +1,6 @@
 import { Observable, of } from "rxjs";
 
-const gifMock = {
+export const gifMock = {
   data: [
     {
       images: {
