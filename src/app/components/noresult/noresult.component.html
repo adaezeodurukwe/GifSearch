@@ -1,0 +1,8 @@
+<div *ngIf="searchTerm$ | async as term; else startSearching">
+  <span>No result found for {{term}}</span>
+</div>
+<ng-template #startSearching>
+  <div>
+   Start searching Gifs
+  </div>
+</ng-template>

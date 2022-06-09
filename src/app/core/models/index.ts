@@ -13,4 +13,5 @@ export interface ReturnData {
 export interface SearchStateModel {
   gifs: Gif[];
   loading: boolean;
+  searchParam: string;
 }

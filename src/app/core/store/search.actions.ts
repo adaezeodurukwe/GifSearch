@@ -11,3 +11,8 @@ export class GetResult {
   public static type = 'GetResult';
   constructor(public payload: string) {}
 }
+
+export class SetSearchTerm {
+  public static type = 'SetSearchTerm';
+  constructor(public payload: string) {}
+}

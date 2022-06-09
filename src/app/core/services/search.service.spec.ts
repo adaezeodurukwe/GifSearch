@@ -1,4 +1,3 @@
-import { fakeAsync } from '@angular/core/testing';
 import { SearchService } from './search.service';
 import { of } from 'rxjs';
 import { gifMock } from './search.service.mock';
@@ -15,7 +14,7 @@ describe('SearchService', () => {
   it('should get gifs', () => {
     httpClientSpy.get.and.returnValue(of(gifMock));
 
-    searchService.searchGIF("mimi").subscribe((gifs) => {
+    searchService.searchGIF('mimi').subscribe((gifs) => {
       expect(gifs).toEqual(gifMock);
     });
     expect(httpClientSpy.get.calls.count()).toBe(1);

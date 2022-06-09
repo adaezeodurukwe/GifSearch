@@ -10,8 +10,9 @@ import { By } from '@angular/platform-browser';
 import { NgxsModule, Store } from '@ngxs/store';
 import { SearchService } from 'src/app/core/services/search.service';
 import { mockSearchService } from 'src/app/core/services/search.service.mock';
-import { GetResult, SetLoading } from 'src/app/core/store/search.actions';
+import { GetResult, SetLoading, SetSearchTerm } from 'src/app/core/store/search.actions';
 import { SearchState } from 'src/app/core/store/search.state';
+import { NoresultComponent } from '../noresult/noresult.component';
 import { ResultsComponent } from './results.component';
 
 const initialState = {
@@ -29,7 +30,7 @@ describe('ResultsComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ResultsComponent],
+        declarations: [ResultsComponent, NoresultComponent],
         imports: [HttpClientTestingModule, NgxsModule.forRoot([SearchState])],
         schemas: [NO_ERRORS_SCHEMA],
         providers: [{ provide: SearchService, useValue: mockSearchService }],
@@ -48,6 +49,7 @@ describe('ResultsComponent', () => {
 
   it('should create', () => {
     const emptyStateDiv = fixture.debugElement.query(By.css('.emptyState'));
+    store.dispatch(new SetSearchTerm(""));
     expect(component).toBeTruthy();
     expect(emptyStateDiv.nativeElement.textContent.trim()).toBe(
       'Start searching Gifs'
@@ -55,6 +57,7 @@ describe('ResultsComponent', () => {
   });
 
   it('should show loading image when loading is true', fakeAsync(() => {
+    store.dispatch(new SetSearchTerm("me"));
     store.dispatch(new SetLoading(true));
     let loaderDiv: DebugElement;
 
@@ -68,6 +71,8 @@ describe('ResultsComponent', () => {
   }));
 
   it('should return gifs', fakeAsync(() => {
+    store.dispatch(new SetSearchTerm("me"));
+    store.dispatch(new SetLoading(false));
     store.dispatch(new GetResult('me'));
 
     fixture.whenRenderingDone().then(() => {

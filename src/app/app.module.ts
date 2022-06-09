@@ -6,12 +6,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxsStoreModule } from './core/store/store.module';
 import { SearchComponent } from './components/search/search.component';
 import { ResultsComponent } from './components/results/results.component';
+import { NoresultComponent } from './components/noresult/noresult.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    ResultsComponent
+    ResultsComponent,
+    NoresultComponent,
   ],
   imports: [
     BrowserModule,

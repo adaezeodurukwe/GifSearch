@@ -3,12 +3,17 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
 import { Gif, SearchStateModel } from '../models';
 import { SearchService } from '../services/search.service';
-import { GetResult, ResetResult, SetLoading } from './search.actions';
-
+import {
+  GetResult,
+  ResetResult,
+  SetLoading,
+  SetSearchTerm,
+} from './search.actions';
 
 @State<SearchStateModel>({
   name: 'gifs',
   defaults: {
+    searchParam: '',
     gifs: [],
     loading: false,
   },
@@ -27,19 +32,32 @@ export class SearchState {
     return state.gifs;
   }
 
+  @Selector()
+  public static searchTerm(state: SearchStateModel): string {
+    return state.searchParam;
+  }
+
   @Action(ResetResult)
-  resetResult({ patchState }: StateContext<SearchStateModel>) {
-    patchState({ gifs: [] })
+  resetResult({ setState }: StateContext<SearchStateModel>) {
+    setState({ gifs: [], searchParam: '', loading: false });
+  }
+
+  @Action(SetSearchTerm)
+  setSearchTerm(
+    { patchState }: StateContext<SearchStateModel>,
+    { payload }: SetSearchTerm
+  ) {
+    patchState({ searchParam: payload });
   }
 
   @Action(GetResult)
   getResult(
-    { setState, patchState }: StateContext<SearchStateModel>,
+    { patchState }: StateContext<SearchStateModel>,
     { payload }: GetResult
   ) {
     return this.searchService.searchGIF(payload).pipe(
       tap((data) => {
-        setState({ gifs: data.data, loading: false });
+        patchState({ gifs: data.data, loading: false });
       }),
       catchError((): any => {
         patchState({ loading: false });
